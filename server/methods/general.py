@@ -12,12 +12,12 @@ class General():
             data["result"]["supply"] = utils.supply(data["result"]["blocks"])["supply"]
             data["result"]["reward"] = utils.reward(data["result"]["blocks"])
             data["result"].pop("verificationprogress")
-            data["result"].pop("initialblockdownload")
+            #data["result"].pop("initialblockdownload")
             data["result"].pop("pruned")
             data["result"].pop("softforks")
             data["result"].pop("bip9_softforks")
-            data["result"].pop("warnings")
-            data["result"].pop("size_on_disk")
+            #data["result"].pop("warnings")
+            #data["result"].pop("size_on_disk")
 
             nethash = utils.make_request("getnetworkhashps", [120, data["result"]["blocks"]])
             if nethash["error"] is None:
@@ -48,7 +48,7 @@ class General():
         # return data
 
         return utils.response({
-            "feerate": utils.satoshis(0.00001),
+            "feerate": utils.satoshis(0.0002),
             "blocks": 6
         })
 
@@ -68,5 +68,5 @@ class General():
     @classmethod
     @cache.memoize(timeout=600)
     def price(cls):
-        link = "https://api.coingecko.com/api/v3/simple/price?ids=bellcoin&vs_currencies=btc,usd,jpy"
+        link = "https://api.coingecko.com/api/v3/simple/price?ids=bitzeny&vs_currencies=btc,usd,jpy"
         return requests.get(link).json()
